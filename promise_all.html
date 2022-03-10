@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const posts = [
+            {title:'Post one', body: 'This is post one',},
+            {title:'Post two', body: 'This is post two',}
+        ];
+
+        function getPosts(){
+            
+              setTimeout(() => {
+                let output = '';
+                for( let i =0; i< posts.length; i++) {
+                    output += `<li> ${posts[i].title}  </li>`;
+                }
+                document.body.innerHTML = output;
+            },1000);
+        }
+
+        function createPost(post){
+             return new Promise ((resolve,reject) => {
+                setTimeout( () => {
+                posts.push(post);
+
+               const error = true;
+
+               if(!error){
+                   resolve();
+               }
+               else {
+                   reject('Error: Something went wrong');
+               }
+            },2000);
+        });
+    }
+
+
+    
+            
+   /*
+        createPost({ title: 'post three', body: 'This is post three'})
+        .then(getPosts)
+        .catch(err => console.log(err));
+   */
+
+     const promise1 = Promise.resolve('Hello World');
+     const promise2 = 10;
+     const promies3 = new Promise((resolve,reject) => setTimeout(resolve,2000,'Goodbye'));
+     const promies4 = { lastUserActivityTime : ''};
+         
+     updateLastUserActivityTime = {
+         return new Promise((resolve, reject) => {
+             setTimeout(() => {
+                 promies4.lastUserActivityTime = new Date().getTime();
+                 resolve(promies4.lastUserActivityTime)
+             },1000)
+         })
+     }
+
+     userupdates(){
+         Promise.all([creeatePost, updateLastUserActivityTime])
+         .then(([createPostresolve, updateLastUserActivityTimeresolves])=> {
+             console.log(updateLastUserActivityTime)
+         })
+         .catch(err => console.log(err))
+     }
+     
+     Promise.all([promise1,promise2,promies3]).then(values => console.log (values));
+        
+
+    </script>
+</body>
+</html>
